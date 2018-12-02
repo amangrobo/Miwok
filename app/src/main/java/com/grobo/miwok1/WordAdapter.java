@@ -18,6 +18,13 @@ public class WordAdapter extends ArrayAdapter<Word> {
     private int colorResource;
     MediaPlayer mPlayer;
 
+    private void releaseMediaPlayer(){
+        if (mPlayer != null) {
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
     public WordAdapter(Activity context, ArrayList<Word> words, int colorInput){
         super(context, 0, words);
         colorResource = colorInput;
@@ -52,8 +59,16 @@ public class WordAdapter extends ArrayAdapter<Word> {
         textContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                releaseMediaPlayer();
                 mPlayer = MediaPlayer.create(getContext(), currentWord.getAudioResourceId());
                 mPlayer.start();
+
+                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        releaseMediaPlayer();
+                    }
+                });
             }
         });
 
