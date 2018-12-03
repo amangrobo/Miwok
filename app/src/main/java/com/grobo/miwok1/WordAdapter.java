@@ -1,6 +1,7 @@
 package com.grobo.miwok1;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class WordAdapter extends ArrayAdapter<Word> {
 
     private int colorResource;
+    MediaPlayer mPlayer;
 
     public WordAdapter(Activity context, ArrayList<Word> words, int colorInput){
         super(context, 0, words);
@@ -29,8 +31,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        Word currentWord = getItem(position);
-
+        final Word currentWord = getItem(position);
 
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.miwok_text_view);
         miwokTextView.setText(currentWord.getMiwokTranslation());
@@ -47,6 +48,15 @@ public class WordAdapter extends ArrayAdapter<Word> {
         View textContainer = listItemView.findViewById(R.id.text_container);
         int color = ContextCompat.getColor(getContext(), colorResource);
         textContainer.setBackgroundColor(color);
+
+        textContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPlayer = MediaPlayer.create(getContext(), currentWord.getAudioResourceId());
+                mPlayer.start();
+            }
+        });
+
 
         return listItemView;
     }
