@@ -1,8 +1,5 @@
 package com.grobo.miwok1;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-
 public class Word {
 
     private String mDefaultTranslation;

@@ -1,19 +1,24 @@
 package com.grobo.miwok1;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class FamilyMembers extends AppCompatActivity {
 
+    private MediaPlayer mPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
         words.add(new Word("one", "lutti", R.raw.family_father, R.drawable.family_father));
         words.add(new Word("two", "otiiko", R.raw.family_mother, R.drawable.family_mother));
         words.add(new Word("three", "tolookosu", R.raw.family_son, R.drawable.family_son));
@@ -29,5 +34,38 @@ public class FamilyMembers extends AppCompatActivity {
 
         WordAdapter adapter = new WordAdapter(this, words, R.color.category_family);
         numbersListView.setAdapter(adapter);
+
+        numbersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                releaseMediaPlayer();
+                Word audio = words.get(position);
+                mPlayer = MediaPlayer.create(FamilyMembers.this, audio.getAudioResourceId());
+                mPlayer.start();
+
+                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        releaseMediaPlayer();
+                    }
+                });
+
+            }
+        });
+
     }
+
+    private void releaseMediaPlayer() {
+        if (mPlayer != null) {
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
 }
