@@ -16,10 +16,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Numbers" android:label="@string/category_numbers"></activity>
-        <activity android:name=".Phrases" android:label="@string/category_phrases"></activity>
-        <activity android:name=".Colors" android:label="@string/category_colors"></activity>
-        <activity android:name=".FamilyMembers" android:label="@string/category_family"></activity>
+
+        <activity
+            android:name=".Numbers"
+            android:label="@string/category_numbers"
+            android:parentActivityName="com.grobo.miwok1.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.grobo.miwok1.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".Phrases"
+            android:label="@string/category_phrases"
+            android:parentActivityName="com.grobo.miwok1.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.grobo.miwok1.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".Colors"
+            android:label="@string/category_colors"
+            android:parentActivityName="com.grobo.miwok1.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.grobo.miwok1.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".FamilyMembers"
+            android:label="@string/category_family"
+            android:parentActivityName="com.grobo.miwok1.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.grobo.miwok1.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>
