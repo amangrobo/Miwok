@@ -16,14 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_height"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:id="@+id/text_container">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/text_container_2">
 
             <TextView
@@ -54,7 +55,8 @@
             android:src="@drawable/baseline_play_arrow_white_24dp"
             android:translationZ="1dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"/>
 
     </RelativeLayout>
 
